@@ -1,32 +1,47 @@
-import React, { Component } from 'react'
+
 import {
     createStackNavigator,
-    createAppContainer,
-    createBottomTabNavigator
+    createAppContainer
 } from 'react-navigation'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import TabNavigator from './tabNavigation';
 
-import {
-    Login,
-    PhoneLogin
-} from '../pages/index'
+import {MainPages} from './router';
 
+// console.log(...TabNavigator)
+// const MainNavigation = ()=>{
+//     const MainNavigationJson = {};
+//     for( var key in MainPages){
+//         MainNavigationJson[key] = {
+//             screen: MainPages[key]['screen'],
+//             navigationOptions: {title: MainPages[key]['title']}
+//         }
+//         console.log(MainNavigationJson)
+//     }
+//     return MainNavigationJson;
+// }
+const generateMainNavigation = () => {
+    const mainNavigationJson = {};
+    for(var key in MainPages){
+        mainNavigationJson[key] = {
+            screen:MainPages[key].screen,
+            navigationOptions:{
+                title:MainPages[key].title
+            }
+        }
+    }
+    return mainNavigationJson;
+}
 const SketchRouter = createStackNavigator(
     {
-        Login: {
-            screen: Login,
-            navigationOptions: ({ navigation }) => ({
-                header: null
-            })
+        TabNavigator:{
+            screen:TabNavigator,
+            navigationOptions:{
+                header:null
+            }
         },
-        PhoneLogin: {
-            screen: PhoneLogin,
-            navigationOptions: ({ navigation }) => ({
-                header: null
-            })
-        }
+        ...generateMainNavigation(),
+        initalRouteName:'TanNavigator'
     },
-
     {
         headerBackTitleVisible: false
     }

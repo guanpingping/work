@@ -7,7 +7,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-
+import {pTd} from '../common/myCommon'
 export default class PhoneLogin extends React.Component {
     constructor(props) {
         super(props);
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     test:{
-        width: 150,
-        height: 150,
+        width: pTd(150),
+        height: pTd(150),
         justifyContent:'center',
         alignItems: 'center',
         backgroundColor: '#f00'

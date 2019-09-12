@@ -7,6 +7,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
+import {pTd} from '../common/myCommon';
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -18,6 +19,12 @@ export default class Login extends React.Component {
     render() {
         return (
             <SafeAreaView style={styles.contaner}>
+                <View style={styles.box}>
+                    <Text style={styles.tit}>客户</Text>
+                    <View style={styles.cons}>
+                        <Text style={styles.con}>二额外若翁热无热无额外若翁认为热无热无若翁热无热无若</Text>
+                    </View>
+                </View>
                 <StatusBar barStyle="dark-content" />
                 <TouchableOpacity onPress={()=>{this.props.navigation.navigate('PhoneLogin')}}
                     style={styles.test}>
@@ -28,6 +35,24 @@ export default class Login extends React.Component {
     }
 }
 const styles = StyleSheet.create({
+    box:{
+        flexDirection:'row',
+        backgroundColor:'skyblue',
+        marginBottom:pTd(50),
+        width:pTd(560),
+        justifyContent:'space-between',
+        paddingLeft:pTd(20),
+        paddingRight:pTd(20)
+    },
+    tit:{
+        marginRight:pTd(30)
+    },
+    cons:{
+        flex:1,
+        // justifyContent:'flex-end',
+        alignItems:'flex-end'
+        // flexDirection:'row'
+    },
     contaner: {
         backgroundColor: '#fff',
         flex: 1,
@@ -35,8 +60,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     test:{
-        width: 150,
-        height: 150,
+        width: pTd(150),
+        height: pTd(150),
         justifyContent:'center',
         alignItems: 'center',
         backgroundColor: '#0f0'
