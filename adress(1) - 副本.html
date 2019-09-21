@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <select id="province">//创建省份下拉菜单
+        <option>--省份--</option>
+    </select>
+    <select id="city">//创建市下拉菜单
+        <option>--市--</option>
+    </select>
+    <select id="code">//创建邮编下拉菜单
+        <option>--邮编--</option>
+    </select> -->
+    <div class="form-group">
+            <label class="col-sm-1 control-label no-padding-right" style="color:red"
+                   for="form-field-6"> 公司注册地区 </label>
+            <div class="col-sm-9">
+                <select id="province" runat="server" name="province_id" onchange="getCountry(this.options[this.options.selectedIndex].value,'city')">
+                    <option value="">请选择</option>
+                </select>
+                <select id="city" runat="server" name="city_id" onchange="getCountry(this.options[this.options.selectedIndex].value,'district')">
+                    <option value="">请选择</option>
+                </select>
+                <select id="district" runat="server" name="district_id" onchange="getDistrict()">
+                    <option value="">请选择</option>
+                </select>
+                <input type="text" name="company_register_addr" placeholder="公司注册地区" class="col-xs-10 col-sm-5"/>
+                <input value='[{"name":"河南省","id":"410000"},{"name":"周口市","id":"411600"},{"name":"沈丘县","id":"411624"}]' id="btn"/>
+            </div>
+        </div>
+</body>
+</html>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script>
+    var arr = [];
+    var brr = [];
+    if($("#btn").val().length>0){
+        brr = JSON.parse($("#btn").val());
+    }
+    getCountry(1,'province');		//从省级开始
+    function getCountry(parent_id,selectid){
+        $("#"+selectid+"").empty();
+        $("#"+selectid+"").append("<option value=''>请选择</option>");
+        $("#district").empty();
+        $("#district").append("<option value=''>请选择</option>");
+        var param = {
+            'parent_id':parent_id
+        }
+        $.ajax({
+            type:'get',
+            dataType:'json',
+            url:'http://192.168.100.37/jiafuyun_api/doc?service=Area_ListGet&&parent_id='+parent_id,
+            success:function(data){
+                var data = data.data.list;
+                if(data.length!=0){
+                    if(brr.length!=0){
+                        brr.forEach((item,index)=>{
+                            for(i=0;i<data.length;i++){
+                                if(data[i].id==item.id){
+                                    console.log(data[i].id==item.id)
+                                    $("#"+selectid+"").append("<option value='"+data[i].id+"' selected>"+data[i].name+"</option>");
+                                    // brr.splice(index,1);
+                                    if(selectid === 'province'){
+                                        getCountry(data[i].id,'city')
+                                    }
+                                    if(selectid === 'city'){
+                                        getCountry(data[i].id,'district')
+                                    }
+                                    // break;
+                                }else{
+                                    
+                                    if(selectid === 'province'&&index == 0){
+                                        $("#"+selectid+"").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+                                    }
+                                    if(selectid === 'city'&&index == 1){
+                                        $("#"+selectid+"").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+                                    }
+                                    if(selectid === 'district'&&index == 2){
+                                        $("#"+selectid+"").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+                                    }
+                                }
+                            }
+                        })
+                    }else{
+                        // console.log('111')
+                        $("#"+selectid+"").empty();
+                        $("#"+selectid+"").append("<option value=''>请选择</option>");
+                        $("#district").empty();
+                        $("#district").append("<option value=''>请选择</option>");
+                        for(i=0;i<data.length;i++){
+                            $("#"+selectid+"").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+                        }
+                    }
+                }
+                arr.length = 0;
+                if($("#province").val()){
+                    arr[0]={
+                        "name":$("#province").find("option:selected").text(),
+                        "id":$("#province").val()
+                    }
+                }
+                if($("#city").val()){
+                    arr[1]={
+                        "name":$("#city").find("option:selected").text(),
+                        "id":$("#city").val()
+                    }
+                } 
+                if($("#district").val()){
+                    arr[2]={
+                        "name":$("#district").find("option:selected").text(),
+                        "id":$("#district").val()
+                    }
+                    $("input[name='company_register_addr']").attr("value",JSON.stringify(arr));
+                } 
+            },
+            error:function(err){
+                console.log("请求失败")
+            }
+        })
+    }
+    function getDistrict(){
+        if($("#district").val()){
+            arr[2]={
+                "name":$("#district").find("option:selected").text(),
+                "id":$("#district").val()
+            }
+            console.log(arr,'111')
+            $("input[name='company_register_addr']").attr("value",JSON.stringify(arr));
+        }
+    }
+</script>

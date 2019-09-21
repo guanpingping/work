@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <select id="province">//创建省份下拉菜单
+        <option>--省份--</option>
+    </select>
+    <select id="city">//创建市下拉菜单
+        <option>--市--</option>
+    </select>
+    <select id="code">//创建邮编下拉菜单
+        <option>--邮编--</option>
+    </select> -->
+    <div class="form-group">
+            <label class="col-sm-1 control-label no-padding-right" style="color:red"
+                   for="form-field-6"> 公司注册地区 </label>
+            <div class="col-sm-9">
+                <select id="province" runat="server" name="province_id" onchange="getCountry(this.options[this.options.selectedIndex].value,'city')">
+                    <option value="">请选择</option>
+                </select>
+                <select id="city" runat="server" name="city_id" onchange="getCountry(this.options[this.options.selectedIndex].value,'district')">
+                    <option value="">请选择</option>
+                </select>
+                <select id="district" runat="server" name="district_id" onchange="getDistrict()">
+                    <option value="">请选择</option>
+                </select>
+                <input type="text" name="company_register_addr" placeholder="公司注册地区" class="col-xs-10 col-sm-5"/>
+                <input value='[{"name":"湖北省","id":"420000"},{"name":"襄阳市","id":"420600"},{"name":"樊城区","id":"420606"}]' id="btn"/>
+            </div>
+        </div>
+</body>
+</html>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script>
+    var arr = [];
+    var brr = [];
+    if($("#btn").val()){
+        brr = JSON.parse($("#btn").val()).map(v=>v.id);
+    }
+    let [id1,id2,id3] = brr;
+    getCountry(1,'province');		//从省级开始
+    function getCountry(parent_id,selectid){
+        if(selectid === 'city'){
+            $("#city").html('<option value="">请选择</option>');
+            $("#district").html('<option value="">请选择</option>');
+        }
+        if(selectid === 'district'){
+            $("#district").html('<option value="">请选择</option>');
+        }
+        
+        var param = {
+            'parent_id':parent_id
+        }
+        $.ajax({
+            type:'get',
+            dataType:'json',
+            url:'http://192.168.100.37/jiafuyun_api/doc?service=Area_ListGet&&parent_id='+parent_id,
+            success:function(data){
+                var data = data.data.list;
+                for(i=0;i<data.length;i++){
+                    if(selectid === 'province'){
+                        if(id1 == data[i].id){
+                            $("#"+selectid+"").append("<option value='"+data[i].id+"' selected>"+data[i].name+"</option>");
+                            getCountry(id1,'city');
+                        }else{
+                            $("#"+selectid+"").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+                        }
+                    }
+                    if(selectid === 'city'){
+                        if(id2 == data[i].id){
+                            $("#"+selectid+"").append("<option value='"+data[i].id+"' selected>"+data[i].name+"</option>");
+                            getCountry(id2,'district');
+                        }else{
+                            $("#"+selectid+"").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+                        }
+                    }
+                    if(selectid === 'district'){
+                        if(id3 == data[i].id){
+                            $("#"+selectid+"").append("<option value='"+data[i].id+"' selected>"+data[i].name+"</option>");
+                        }else{
+                            $("#"+selectid+"").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+                        }
+                    }
+                }
+            },
+            error:function(err){
+                console.log("请求失败")
+            }
+        })
+    }
+    function getDistrict(){
+        arr = [
+            {
+                "name":$("#province").find("option:selected").text(),
+                "id":$("#province").val()
+            },
+            {
+                "name":$("#city").find("option:selected").text(),
+                "id":$("#city").val()
+            },
+            {
+                "name":$("#district").find("option:selected").text(),
+                "id":$("#district").val()
+            },
+        ]
+        $("input[name='company_register_addr']").attr("value",JSON.stringify(arr));
+        console.log(arr)
+    }
+</script>

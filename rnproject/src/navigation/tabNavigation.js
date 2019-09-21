@@ -1,6 +1,4 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import HomeIconWithBadge from './tabIcon';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -12,7 +10,8 @@ import {TabPages} from './router.js';
 const TabNavigator = createBottomTabNavigator(
     {
         Home: TabPages.Home,
-        Settings: TabPages.Setting
+        Settings: TabPages.Setting,
+        Example:TabPages.Example
     },
     {
         defaultNavigationOptions: ({ navigation }) => ({
@@ -25,8 +24,10 @@ const TabNavigator = createBottomTabNavigator(
                     // Sometimes we want to add badges to some icons.
                     // You can check the implementation below.
                     IconComponent = HomeIconWithBadge;
-                } else if (routeName === 'Settings') {
+                } else if (routeName === 'Settings' ) {
                     iconName = 'ios-options';
+                } else if( routeName === 'Example' ){
+                    iconName = 'md-apps';
                 }
                 // You can return any component that you like here!
                 return <IconComponent name={iconName}
