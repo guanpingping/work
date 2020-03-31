@@ -32,7 +32,8 @@ const TabNavigator = createBottomTabNavigator(
                 // You can return any component that you like here!
                 return <IconComponent name={iconName}
                     size={25}
-                    color={tintColor} />;
+                    color={tintColor} 
+                    />;
             }
         }),
         tabBarOptions: {

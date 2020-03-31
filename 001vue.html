@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,22 +11,31 @@
         <h2>{{message}}</h2>
     </div>
 </body>
-</html>
-<script src="vue.js"></script>
+</html> -->
+<script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
 <script>
-    var vm = new Vue({
-        //当前vue所作用的一个范围
-        el:"#app",//document.querySelector
-        //当前vue的一些属性,所有的属性都会放在data里面
-        data:{
-            message:"1819"
+    var price_1 = 20; //两小时段  每半点价格
+    var price_2 = 22.5; //三小时段 每半点价格
+    var time1 = ["07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00","18:30"]
+    var time2 = ["07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00","18:30","19:00"]
+    var time_price1 = [0,1,2,3,4,5,13,14,16,16,17];
+    console.log(getTolalMoney(2,9,20,22.5)); //  8.00 +12.00 3*20 +5*22.5
+    console.log(3*20 +5*22.5);
+    function getTolalMoney(start_time,end_time,price_1,price_2){
+        var leng = end_time - start_time;
+        if(leng < 2){
+            return '时间选择错误';
         }
-    });
-   
+        var a = 0; //两小时段 半小时个数
+        var b =0; //三小时段 半小时个数
+        for (i = start_time ; i < end_time + 1; i++) {
+            if( time_price1.indexOf(i+1) > 0 ){
+                a += 1;
+            }else{
+                b += 1;
+            }
+        }
 
-
-
-
-
-   
+        return price_1 * a + price_2 * b;
+    }
 </script>

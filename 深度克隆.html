@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="head" :style="note">
+            　　　　<span>收银台</span>
+            　　</div>
+    </div>
+    <input placeholder="请输入"/>
+</body>
+
+</html>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script src="https://cdn.bootcss.com/require.js/1.0.3/require.js"></script>
+<script>
+    console.log('a')
+    let p = new Promise( function (res , rej ){
+        res();
+    });
+    p.then(function(){
+        console.log('b')
+    },function(){
+        
+    })
+    console.log('c')
+
+    // then（执行成功，执行失败）
+    // then(执行成功).catch（执行失败）
+    
+    // promise.all()  用于所有异步全部完成，统一执行
+    // promise.race()  谁第一先跑完，就执行谁，后面的就不管了
+
+
+    // let arr = [1,2,3,4,5];
+    // arr.map(function( item , index ,arr ){
+    //     // console.log(item,index,arr)
+    //     return
+    // })
+// let arr1 = [1,2,3,4,[3,4]]
+//   let arr2 = arr.flatMap(function( item , index ,arr ){
+//         console.log(item,index,arr)
+//         return [item,item+10]
+//    })+
+
+//    console.log(arr2)
+
+   var obj = { a:1 , b:2 , c:{d:10,e:20}};
+   var obj1 = {};
+   for(var key in obj ){
+       obj1[key] = obj[key];
+   }
+   Object.assign(obj1,obj);
+//    obj.c.d = 100;
+   console.log(obj)
+        // //遍历对象 for( var prop in obj )
+        // // for in 可以遍历对象也可以遍历数组，可以通知数组对象
+
+        // // 1、判断是不是原始值（基本数据类型） typeof  instanceof Object  toString constructor
+        // // 比较建议用toString
+        // // 
+        // // 2、判断是数组还是对象
+        // // 3、建立相应的数组或者对象
+        // 递归
+
+        // 深度克隆
+        // function deepClone( origin , target ){
+        //     var target = target || {};
+        //         toStr = Object.prototype.toString,
+        //         arrStr = "[Object Array]";
+
+        //         for ( var prop in origin ){
+        //             if( origin.hasOwnProperty(prop)) {
+        //                 //hasOwnProperty()方法返回一个布尔值，判断对象是否包含特定的自身（非继承）属性
+        //                 if(origin[prop]!=null&&typeof(origin[prop]) == 'object'){
+        //                     if(toStr.call(origin[prop]) == arrStr){
+        //                         target[prop] = [];
+        //                     }else{
+        //                         target[prop] = {}
+        //                     }
+                            
+        //                     deepClone( origin[prop] , target[prop]);
+        //                 }else{
+        //                     target[prop] = origin[prop];
+        //                 }
+        //             }
+        //         }
+        //         return target;
+        // }
+</script>

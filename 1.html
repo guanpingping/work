@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    /* .boximg{
+        width: 300px;
+        height: 300px;
+        background-position: center;
+        background-size: cover;
+    } */
+    /* .pic {
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .pic img {
+        min-width: 200px;
+        min-height: 200px;
+    } */
+    img{
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+</style>
+
+<body>
+    <!-- <div style="background-image: url('./img/1.jpg');" class="boximg"/> -->
+    <!-- <span class="pic"><img src="./img/1.jpg" /></span> -->
+    <img src="./img/1.jpg" /><br/>
+</body>
+
+</html>
+<script>
+
+// 有干个图片，长宽比既有大于的也有小于1的，且长宽均大于200px,请用css实现显示图片的正方形居中缩略图（200px*200px），要求短边等比自适应，长边overflow？
+
+    // 水仙花
+    
+    // for( var i = 100 ; i < 1000 ; i++ ){
+    //     var g = i % 10 ,
+    //         s = parseInt(i/10)%10,
+    //         b = parseInt(i/100);
+    //     let sum = Math.pow( g , 3 ) + Math.pow( s , 3 ) + Math.pow( b , 3);
+    //     if( i == sum ){
+    //         document.write(i+'是水仙数<br/>')
+    //     }
+    // }
+
+    // //输出任意一个数的因数
+    // var num = 22;
+    // for( var i = 1 ; i <= num ; i++ ){
+    //     if( num % i == 0 ){
+    //         document.write( i + " ");
+    //     }
+    // }
+    // document.write('<br/>')
+    // //打印5的阶乘
+    // var fac = 1;
+    // var sums = 0;
+    // for ( var i = 1 ; i <= 5 ; i++ ){
+    //     fac *= i;
+    //     sums +=fac;
+    // }
+    // document.write( fac +'阶乘' , sums +'阶乘和')
+
+    // function fnSum(){
+    //     //从arguments中取出 实参
+    //     //arguments[下标]   下标从0开始
+    //     var s = 0;
+    //     for ( var i =0 ; i < arguments.length ; i++ ){
+    //     s +=arguments[i];
+    //     }
+    //     console.log(s);
+    // }
+    // fnSum(1,2,3,4,5);
+    
+    // var unde;
+    // var nu = null;
+
+    // var arr = [1,2,3,4];
+    // var obj = {type:"porsche", model:"911", color:"white"}
+    // console.log(typeof unde ,'是undefined')
+    // console.log(typeof nu ,'是null')
+    // console.log(typeof 88 ,'是number')
+    // console.log(typeof true ,'boolean')
+    // console.log(typeof obj ,'是对象')
+    // console.log(typeof fnSum,'是function' )
+    // console.log(typeof arr ,'是数组')
+
+    //怎么区分是数组还是对象
+    // console.log(arr.constructor==Array);
+    // console.log(obj.constructor==Object)
+    // arr.constructor
+    // console.log([] instanceof Array , {} instanceof Object )
+    // console.log( Object.prototype.toString.call([]) , Object.prototype.toString.call({}) )
+    // Object.prototype.toString.call([])   //["object Array"]
+    // Object.prototype.toString.call({})   //["object Object"]
+    
+    /* 
+        +-* /%
+        两侧都是数值正常计算
+        有一侧是纯数字字符串，字符串自动转换成数值 正常计算
+        有一侧是非数字字符串 结果是NaN
+        NaN:not a number不是一个数NaN不等于任何数，包括他自己
+        %模运算符（求余数）
+
+    */
+    
+    // console.log( undefined === null)
+
+    // console.log('hello'.repeatify(3))
+
+    /* 
+        创建“原生”方法
+        给字符串对象定义一个repeatify功能，当传入一个整数时，它会返回重复n次字符串的结果
+
+        console.log('hello'.repeatify(3)) //hellohellohello
+    */
+
+    
+    console.log('hello'.repeatify(3));
+</script>

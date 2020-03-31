@@ -22,7 +22,7 @@ export default class Login extends React.Component {
                 <View style={styles.box}>
                     <Text style={styles.tit}>客户</Text>
                     <View style={styles.cons}>
-                        <Text style={styles.con}>二额外若翁热无热无额外若翁认为热无热无若翁热无热无若</Text>
+                        <Text style={styles.con}>菩提本无树，明镜亦非台。本来无一物，何处惹尘埃？</Text>
                     </View>
                 </View>
                 <StatusBar barStyle="dark-content" />
